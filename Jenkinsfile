@@ -6,25 +6,25 @@ pipeline {
     }
 
     environment {
-        DEPLOY_DIR = "/opt/tomcat/webapps" // Path to your Tomcat
+        DEPLOY_DIR = "C:\\tomcat\\webapps" // adjust as per your Tomcat path
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/mg2412/boxfuse-sample-java-war-hello.git'
+                git 'https://github.com/boxfuse/boxfuse-sample-java-war-hello'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                bat 'mvn clean package'
             }
         }
 
         stage('Deploy to Tomcat') {
             steps {
-                sh 'cp target/*.war $DEPLOY_DIR/hello.war'
+                bat 'copy target\\*.war %DEPLOY_DIR%\\hello.war'
             }
         }
     }
